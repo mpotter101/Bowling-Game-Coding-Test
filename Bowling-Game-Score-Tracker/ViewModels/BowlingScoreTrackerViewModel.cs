@@ -10,7 +10,7 @@ using Bowling_Game_Score_Tracker.Models;
 using Caliburn.Micro;
 
 // ---
-// This block of comments only exist as part of expectation of this app being a test. If this were going to a client, such notes would be taken elsewhere, but I figured it would grant some transparency to my line of thinking when reviewing the object structure
+// This block of comments only exist as part of expectation of this app being a test. If this were going to a client, such notes would be taken outside of code, but I figured it would grant some transparency to my line of thinking when reviewing the object structure
 
 // Missing Features:
 //      Auto-focusing cells in a frame once a score is entered or the reset button is hit
@@ -18,7 +18,7 @@ using Caliburn.Micro;
 // Questions:
 //      How to change focus of an element with the MVVM structure? I saw a few posts using the Code-Behind class, but that seems to be a poor practice for MVVM...
 //      How to best go about generating templated objects in an environment where the the view should not be directly linked to?
-//      ...More generically, what are best practices for manipulating XAML? Web-Dev has a concept of the DOM and allows the freedom of generating structure in code without tying it to the look thanks to CSS. Structure can be manipulated without locking an app into a specific appearance, certainly there is a concept in WPF+MVVM akin to that?
+//      ...More generically, what are best practices for manipulating XAML? Web-Dev has a concept of the DOM and allows the freedom of generating structure in code without tying it to the look thanks to CSS. Structure can be manipulated without locking an app into a specific appearance, perhaps there is a concept in WPF+MVVM akin to that?
 // ---
 
 namespace Bowling_Game_Score_Tracker.ViewModels
@@ -94,7 +94,7 @@ namespace Bowling_Game_Score_Tracker.ViewModels
                     // If this fails, the user put in one of the whitelisted special characters
                     int scoreVal = int.Parse (value);
 
-                    // Make sure the user isn't trying to input a combined value greater than 10
+                    // Make sure the user isn't trying to input a combined value greater than 9 since knocking down all ten pins results in a special score
                     bool validScore = true;
                     if (scoreIndex == 1) {
                         validScore = (BowlingFrames [frameIndex].Scores [0] + scoreVal) < 10;
@@ -125,6 +125,7 @@ namespace Bowling_Game_Score_Tracker.ViewModels
             // Update UI based on state of bowling frames
             NotifyOfPropertyChange (() => BowlingFrames);
 
+            // Update UI again to re-enable player inputs
             _processingInput = false;
             NotifyOfPropertyChange ( () => CanInputBeMade );
         }
