@@ -51,6 +51,10 @@ namespace Bowling_Game_Score_Tracker.ViewModels
             get { return _bowlingFrames; }
         }
 
+        public int CurrentlyPlayingFrameIndex {
+            get { return _furthestFrameModified; }
+        }
+
         public void HandleUserInput(int frameIndex, int scoreIndex, string value) { 
             // Prevent more than input from being handled at a time
             if (_processingInput) { return; }
@@ -65,12 +69,14 @@ namespace Bowling_Game_Score_Tracker.ViewModels
             //    * the cursor should auto-advance to the next shot (or next frame in case of a strike)
 
             bool validInput = (
+                // The frame index isn't out of bounds
+                frameIndex > -1 && frameIndex < BowlingFrames.Length &&
                 // The string is less than 2 characters long
                 value.Length < 2 && 
-                    // and The string contains any of the white listed numbers OR is the strike or spare character
-                    ( value.IndexOfAny (_validNumbers.ToCharArray ()) != -1 || 
-                        (value.ToLower () == STRIKE_CHAR || value == SPARE_CHAR) 
-                    )
+                // and The string contains any of the white listed numbers OR is the strike or spare character
+                ( value.IndexOfAny (_validNumbers.ToCharArray ()) != -1 || 
+                    (value.ToLower () == STRIKE_CHAR || value == SPARE_CHAR) 
+                )
             );
 
 
@@ -136,6 +142,7 @@ namespace Bowling_Game_Score_Tracker.ViewModels
             // TODO: Figure out how to set the focus of an element from here
             foreach (BowlingFrameModel frame in BowlingFrames) {
                 frame.DisplayedCombiendScore = "";
+                frame.CombinedScore = 0;
 
                 for (int index = 0; index < frame.Scores.Length; index++) {
                     frame.Scores [index] = 0;
