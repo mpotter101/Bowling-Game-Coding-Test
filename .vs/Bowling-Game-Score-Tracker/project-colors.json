@@ -20,7 +20,12 @@
       "ProjectGuid": "34b25aba-26ef-4aac-8b4c-a3927efb7287",
       "DisplayName": "BowlingGameScoreTracker.Tests",
       "ColorIndex": 2
+    },
+    "3a39e4cf-ac80-4b84-b913-266a2a1a72c8": {
+      "ProjectGuid": "3a39e4cf-ac80-4b84-b913-266a2a1a72c8",
+      "DisplayName": "BowlingGameScoreTracker.Tests",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 3
+  "NextColorIndex": 4
 }
